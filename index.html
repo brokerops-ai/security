@@ -1,0 +1,58 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Security & Compliance — BrokerOps AI</title>
+<meta name="description" content="How BrokerOps AI protects broker loss-run/bordereaux data.">
+<style>
+  body{font:16px/1.6 system-ui,Segoe UI,Inter,Arial;margin:24px;max-width:900px}
+  h1{margin-bottom:0} .muted{color:#666} section{margin:24px 0}
+  ul{margin:8px 0 0 20px}
+  nav a{margin-right:12px}
+</style>
+<h1>Security & Compliance</h1>
+<p class="muted">BrokerOps AI — Last updated: <!-- update when you change --> 26 Sep 2025 (AEST)<br>
+Contact: <a href="mailto:brokeropsai+security@gmail.com">brokeropsai+security@gmail.com</a></p>
+
+<nav>
+  <a href="#glance">At a glance</a>
+  <a href="#flow">Data flow</a>
+  <a href="#subprocessors">Subprocessors</a>
+  <a href="#legal">Legal</a>
+</nav>
+
+<section id="glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Privacy-by-default: names masked; policy numbers HMAC-SHA256.</li>
+    <li>No data retained by default; files processed in-memory.</li>
+    <li>Encryption: TLS in transit; encrypted disks at rest.</li>
+    <li>Optional, explicit toggles: Azure OCR (PDFs), OpenAI (aggregates only).</li>
+    <li>Contact: <a href="mailto:brokeropsai+hello@gmail.com">brokeropsai+hello@gmail.com</a></li>
+  </ul>
+</section>
+
+<section id="flow">
+  <h2>Data flow</h2>
+  <ol>
+    <li>Upload CSV/XLSX/PDF over HTTPS.</li>
+    <li>Process & mask in memory. Outputs: clean CSV/XLSX, issues, HTML report, optional ZIP.</li>
+    <li>Optional: PDFs sent to Azure OCR; aggregates (counts/sums/dates) sent to OpenAI for a 5-bullet summary.</li>
+    <li>Minimal diagnostics; filenames hashed/redacted.</li>
+  </ol>
+</section>
+
+<section id="subprocessors">
+  <h2>Subprocessors</h2>
+  <ul>
+    <li>Microsoft Azure Document Intelligence — OCR for PDFs (opt-in only).</li>
+    <li>OpenAI (Responses API) — aggregate metrics only; no rows/PII (opt-in only).</li>
+  </ul>
+</section>
+
+<section id="legal">
+  <h2>Legal</h2>
+  <ul>
+    <li>Security contact: <a href="mailto:brokeropsai+security@gmail.com">brokeropsai+security@gmail.com</a></li>
+    <li>Download: <a href="/security.pdf">Security PDF</a> (add soon)</li>
+  </ul>
+</section>
