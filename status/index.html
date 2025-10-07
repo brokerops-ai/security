@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BrokerOps AI — Status</title>
+  <style>
+    :root { --ok:#16a34a; --warn:#f59e0b; --bad:#dc2626; --bg:#0b1220; --card:#111827; --muted:#94a3b8; --text:#e5e7eb; }
+    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    .wrap{max-width:960px;margin:40px auto;padding:0 16px}
+    .banner{display:flex;align-items:center;gap:12px;background:linear-gradient(180deg,#0c1b2a,#0b1320);border:1px solid #1f2937;border-radius:14px;padding:18px 20px}
+    .dot{width:12px;height:12px;border-radius:50%}
+    .ok{background:var(--ok)} .warn{background:var(--warn)} .bad{background:var(--bad)}
+    h1{font-size:26px;margin:0} h2{font-size:18px;margin:22px 0 12px}
+    .grid{display:grid;grid-template-columns:1fr 160px;gap:10px}
+    .card{background:var(--card);border:1px solid #1f2937;border-radius:12px;padding:16px}
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;padding:3px 8px;border-radius:999px;font-size:12px}
+    .pill.ok{background:rgba(22,163,74,.15);color:#34d399;border:1px solid rgba(52,211,153,.3)}
+    .pill.warn{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.3)}
+    .pill.bad{background:rgba(220,38,38,.12);color:#f87171;border:1px solid rgba(248,113,113,.3)}
+    .uptime{display:flex;gap:4px;flex-wrap:wrap}
+    .box{width:8px;height:8px;border-radius:2px;background:#1f2937}
+    .box.ok{background:#0ea5e9}
+    .foot{margin:26px 0;color:var(--muted);font-size:13px}
+    a{color:#93c5fd}
+    .incidents .item{border-top:1px solid #1f2937;padding:12px 0}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;background:#0f172a;border:1px solid #1f2937;padding:0 6px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner card">
+      <div class="dot ok"></div>
+      <div>
+        <h1>All systems operational</h1>
+        <div class="muted">Last updated: <span id="lastUpdated">—</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h2>Components</h2>
+      <div class="grid muted" style="font-size:13px;margin-bottom:6px">
+        <div>Component</div><div>Current</div>
+      </div>
+      <div class="grid">
+        <div>BrokerOps App (Shiny)</div><div><span class="pill ok">Operational</span></div>
+        <div>File Intake (Form)</div><div><span class="pill ok">Operational</span></div>
+        <div>Email Delivery</div><div><span class="pill ok">Operational</span></div>
+        <div>Azure OCR (opt-in)</div><div><span class="pill ok">Operational</span></div>
+        <div>OpenAI Aggregates (opt-in)</div><div><span class="pill ok">Operational</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h2>Past 90 days</h2>
+      <div class="uptime" aria-label="90-day uptime heatmap">
+        <script>for(let i=0;i<90;i++){document.write('<span class="box ok"></span>')}</script>
+      </div>
+    </div>
+
+    <div class="card incidents" style="margin-top:18px">
+      <h2>Incidents & maintenance</h2>
+      <div class="muted" style="font-size:14px;margin-bottom:8px">Post updates newest first. Use the template below.</div>
+
+      <!-- Example item (delete if not needed) -->
+      <div class="item">
+        <div><strong>2025-09-20 11:10–11:34 AEST — Brief Shiny restart</strong> <span class="pill warn">Degraded</span></div>
+        <div class="muted">Impact: ~3 min 502s for some users while servers recycled. Root cause: host patching. Mitigation: added health-check + rolling restarts.</div>
+      </div>
+
+      <!-- Template to copy/paste for real incidents -->
+      <div class="item">
+        <div><strong>[YYYY-MM-DD HH:MM TZ] — [Incident title]</strong> <span class="pill bad">Outage</span></div>
+        <div class="muted"><b>Impact:</b> [who/what was affected]. <b>Timeline:</b> start → detection → fix. <b>Cause:</b> [root cause]. <b>Action:</b> [preventative steps].</div>
+      </div>
+    </div>
+
+    <div class="foot">
+      Contact: <a href="mailto:brokeropsai+security@gmail.com">brokeropsai+security@gmail.com</a> •
+      <a href="/security/">Security</a> ·
+      <a href="/security/subprocessors.html">Sub-processors</a> ·
+      <a href="/security/security.pdf">Security PDF</a>
+    </div>
+  </div>
+
+  <script>
+    // Set the "Last updated" timestamp to the viewer's local time
+    const el = document.getElementById("lastUpdated");
+    const d = new Date();
+    try {
+      const fmt = new Intl.DateTimeFormat([], { dateStyle: "medium", timeStyle: "short" });
+      el.textContent = fmt.format(d);
+    } catch(e) { el.textContent = d.toString(); }
+  </script>
+</body>
+</html>
